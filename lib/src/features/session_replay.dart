@@ -232,11 +232,6 @@ class SessionReplay {
     for (final renderObject in autoMasking.renderObjectsToMask) {
       coordinates.addAll(_getMaskCoordinates(renderObject));
     }
-    autoMasking.renderObjectsToMask
-        .removeWhere((element) => element.attached == false);
-    for (final renderObject in autoMasking.renderObjectsToMask) {
-      coordinates.addAll(_getMaskCoordinates(renderObject));
-    }
     return coordinates;
   }
 
