@@ -138,7 +138,7 @@ class Tracking {
 
     //fire and forget to keep synchronicity
     //ignore: unawaited_futures
-    SessionReplay.instance.closeScreenVideo();
+    SessionReplay.instance.closeScreenVideo(screenVisitedFinished);
     await _apiInstance.endScreen(
       EndScreenMessage()
         ..screenName = screenVisitedFinished.name
