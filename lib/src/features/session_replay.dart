@@ -6,8 +6,8 @@ import 'package:decibel_sdk/src/features/autoMasking/auto_masking_class.dart';
 import 'package:decibel_sdk/src/features/frame_tracking.dart';
 import 'package:decibel_sdk/src/features/tracking.dart';
 import 'package:decibel_sdk/src/messages.dart';
-import 'package:decibel_sdk/src/utility/placeholder_image.dart';
 import 'package:decibel_sdk/src/utility/extensions.dart';
+import 'package:decibel_sdk/src/utility/placeholder_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
@@ -100,6 +100,7 @@ class SessionReplay {
     if (!recordingAllowedInThisScreen) {
       return _sendOnePlaceholderImageForThisScreen(getCurrentContext!);
     }
+    if (currentTrackedSreen.isCurrentScreenOverMaxDuration) return;
     if (!Tracking.instance.isPageTransitioning && getCurrentContext != null) {
       await _captureImage(getCurrentContext!);
     } else {
@@ -179,11 +180,13 @@ class SessionReplay {
 
   ///Resends the last screenshot to native (with a new focusTime) only
   ///if there's been a second or more without any new screenshots
-  Future<void> closeScreenVideo() async {
+  Future<void> closeScreenVideo(ScreenVisited screenVisited) async {
     if (lastScreenshotSent != null &&
         DateTime.now().millisecondsSinceEpoch -
                 lastScreenshotSent!.startFocusTime! >
             1000) {
+      if (screenVisited.isCurrentScreenOverMaxDuration) return;
+
       final int startFocusTime = DateTime.now().millisecondsSinceEpoch;
       final ScreenshotMessage screenShotMessage = lastScreenshotSent!;
       lastScreenshotSent = null;
