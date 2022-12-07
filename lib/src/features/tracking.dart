@@ -246,8 +246,6 @@ class Tracking {
         enableAutomaticPopupRecording: enableAutomaticPopupRecording,
         enableAutomaticMasking: enableAutomaticMasking,
       );
-      debugPrint(
-          "DXA - startScreen - name: ${screenVisited.name} - id: ${screenVisited.uniqueId}");
       await startScreen(screenVisited);
     }
   }
