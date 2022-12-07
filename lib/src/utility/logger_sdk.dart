@@ -3,7 +3,7 @@ import 'package:logger/logger.dart';
 
 class LoggerSDK {
   static final LoggerSDK _instance = LoggerSDK._internal();
-
+  static LoggerSDK get instance => _instance;
   factory LoggerSDK.all({
     bool enabled = true,
     bool tracking = true,
@@ -37,38 +37,31 @@ class LoggerSDK {
   bool maskWidget = false;
 
   Logger get trackingLogger {
-    final LoggerSDK instance = LoggerSDK._instance;
-    return _plainLogger(instance.tracking);
+    return _plainLogger(tracking);
   }
 
   Logger get sessionReplayLogger {
-    final LoggerSDK instance = LoggerSDK._instance;
-    return _plainLogger(instance.sessionReplay);
+    return _plainLogger(sessionReplay);
   }
 
   Logger get frameTrackingLogger {
-    final LoggerSDK instance = LoggerSDK._instance;
-    return _plainLogger(instance.frameTracking);
+    return _plainLogger(frameTracking);
   }
 
   Logger get routeObserverLogger {
-    final LoggerSDK instance = LoggerSDK._instance;
-    return _plainLogger(instance.routeObserver);
+    return _plainLogger(routeObserver);
   }
 
   Logger get autoMaskingLogger {
-    final LoggerSDK instance = LoggerSDK._instance;
-    return _plainLogger(instance.autoMasking);
+    return _plainLogger(autoMasking);
   }
 
   Logger get screenWidgetLogger {
-    final LoggerSDK instance = LoggerSDK._instance;
-    return _plainLogger(instance.screenWidget);
+    return _plainLogger(screenWidget);
   }
 
   Logger get maskWidgetLogger {
-    final LoggerSDK instance = LoggerSDK._instance;
-    return _plainLogger(instance.maskWidget);
+    return _plainLogger(maskWidget);
   }
 
   Logger _plainLogger(bool moduleEnabled) {
