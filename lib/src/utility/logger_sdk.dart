@@ -1,24 +1,84 @@
+import 'package:decibel_sdk/src/features/frame_tracking.dart';
 import 'package:logger/logger.dart';
 
 class LoggerSDK {
-  LoggerSDK._internal();
   static final LoggerSDK _instance = LoggerSDK._internal();
-  static LoggerSDK get instance => _instance;
-  final bool enabled = true;
-  final bool tracking = true;
-  final bool sessionReplay = true;
-  final bool frameTracking = true;
-  final bool routeObserver = true;
-  final bool autoMasking = true;
-  final bool screenWidget = true;
-  final bool maskWidget = true;
 
-  Logger get trackingLogger => Logger(
-        filter: ModuleLogFilter(enabled: enabled, moduleEnabled: tracking),
-      );
-  Logger get sessionReplayLogger => Logger(
-        filter: ModuleLogFilter(enabled: enabled, moduleEnabled: sessionReplay),
-      );
+  factory LoggerSDK.all({
+    bool enabled = true,
+    bool tracking = true,
+    bool sessionReplay = true,
+    bool frameTracking = true,
+    bool routeObserver = true,
+    bool autoMasking = true,
+    bool screenWidget = true,
+    bool maskWidget = true,
+  }) {
+    _instance.enabled = enabled;
+    _instance.tracking = tracking;
+    _instance.sessionReplay = sessionReplay;
+    _instance.frameTracking = frameTracking;
+    _instance.routeObserver = routeObserver;
+    _instance.autoMasking = autoMasking;
+    _instance.screenWidget = screenWidget;
+    _instance.maskWidget = maskWidget;
+    return _instance;
+  }
+
+  LoggerSDK._internal();
+
+  bool enabled = false;
+  bool tracking = false;
+  bool sessionReplay = false;
+  bool frameTracking = false;
+  bool routeObserver = false;
+  bool autoMasking = false;
+  bool screenWidget = false;
+  bool maskWidget = false;
+
+  Logger get trackingLogger {
+    final LoggerSDK instance = LoggerSDK._instance;
+    return _plainLogger(instance.tracking);
+  }
+
+  Logger get sessionReplayLogger {
+    final LoggerSDK instance = LoggerSDK._instance;
+    return _plainLogger(instance.sessionReplay);
+  }
+
+  Logger get frameTrackingLogger {
+    final LoggerSDK instance = LoggerSDK._instance;
+    return _plainLogger(instance.frameTracking);
+  }
+
+  Logger get routeObserverLogger {
+    final LoggerSDK instance = LoggerSDK._instance;
+    return _plainLogger(instance.routeObserver);
+  }
+
+  Logger get autoMaskingLogger {
+    final LoggerSDK instance = LoggerSDK._instance;
+    return _plainLogger(instance.autoMasking);
+  }
+
+  Logger get screenWidgetLogger {
+    final LoggerSDK instance = LoggerSDK._instance;
+    return _plainLogger(instance.screenWidget);
+  }
+
+  Logger get maskWidgetLogger {
+    final LoggerSDK instance = LoggerSDK._instance;
+    return _plainLogger(instance.maskWidget);
+  }
+
+  Logger _plainLogger(bool moduleEnabled) {
+    return Logger(
+      filter: ModuleLogFilter(
+        enabled: enabled,
+        moduleEnabled: moduleEnabled,
+      ),
+    );
+  }
 }
 
 class ModuleLogFilter extends DevelopmentFilter {

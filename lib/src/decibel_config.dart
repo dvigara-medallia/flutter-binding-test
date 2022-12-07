@@ -4,6 +4,7 @@ import 'package:decibel_sdk/src/features/session_replay.dart';
 import 'package:decibel_sdk/src/messages.dart';
 import 'package:decibel_sdk/src/utility/enums.dart' as enums;
 import 'package:decibel_sdk/src/utility/extensions.dart';
+import 'package:decibel_sdk/src/utility/logger_sdk.dart';
 import 'package:decibel_sdk/src/utility/route_observer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -129,4 +130,6 @@ class DecibelSdk {
   static Future<String?> getSessionId() async {
     return _api.getSessionId();
   }
+
+  static void enableAllLogs() => LoggerSDK.all();
 }
