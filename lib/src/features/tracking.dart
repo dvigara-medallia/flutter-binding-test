@@ -104,6 +104,8 @@ class Tracking {
     _addVisitedScreenList(
       screenVisited,
     );
+    debugPrint(
+        "DXA - startScreen - name: ${screenVisited.name} - id: ${screenVisited.uniqueId}");
     await _apiInstance.startScreen(
       StartScreenMessage()
         ..screenName = screenVisited.name
@@ -144,6 +146,8 @@ class Tracking {
     //fire and forget to keep synchronicity
     //ignore: unawaited_futures
     SessionReplay.instance.closeScreenVideo(screenVisitedFinished);
+    debugPrint(
+        "DXA - endScreen - name: ${screenVisited.name} - id: ${screenVisited.uniqueId}");
     await _apiInstance.endScreen(
       EndScreenMessage()
         ..screenName = screenVisitedFinished.name
@@ -242,6 +246,8 @@ class Tracking {
         enableAutomaticPopupRecording: enableAutomaticPopupRecording,
         enableAutomaticMasking: enableAutomaticMasking,
       );
+      debugPrint(
+          "DXA - startScreen - name: ${screenVisited.name} - id: ${screenVisited.uniqueId}");
       await startScreen(screenVisited);
     }
   }

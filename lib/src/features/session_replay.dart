@@ -177,6 +177,7 @@ class SessionReplay {
       ..screenName = screenName
       ..startFocusTime = startFocusTime;
     lastScreenshotSent = screenshotMessage;
+    debugPrint("DXA - sendScreenshot - name: ${screenName} - id: ${screenId}");
     await _apiInstance.saveScreenshot(screenshotMessage);
   }
 
