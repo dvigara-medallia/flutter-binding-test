@@ -34,7 +34,11 @@ class LoggerSDK {
   bool autoMasking = false;
   bool screenWidget = false;
   bool maskWidget = false;
-
+  Logger? _screenWidgetLogger;
+  Logger? _maskWidgetLogger;
+  Logger get screenWidgetLogger =>
+      _screenWidgetLogger ??= _plainLogger(screenWidget);
+  Logger get maskWidgetLogger => _maskWidgetLogger ??= _plainLogger(maskWidget);
   Logger get trackingLogger {
     return _plainLogger(tracking);
   }
@@ -53,14 +57,6 @@ class LoggerSDK {
 
   Logger get autoMaskingLogger {
     return _plainLogger(autoMasking);
-  }
-
-  Logger get screenWidgetLogger {
-    return _plainLogger(screenWidget);
-  }
-
-  Logger get maskWidgetLogger {
-    return _plainLogger(maskWidget);
   }
 
   Logger _plainLogger(bool moduleEnabled) {
