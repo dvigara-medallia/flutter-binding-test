@@ -1,4 +1,3 @@
-import 'package:decibel_sdk/src/features/frame_tracking.dart';
 import 'package:logger/logger.dart';
 
 class LoggerSDK {

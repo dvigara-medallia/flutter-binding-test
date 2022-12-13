@@ -1,7 +1,5 @@
 import 'package:decibel_sdk/src/features/autoMasking/auto_masking_enums.dart';
 import 'package:decibel_sdk/src/features/autoMasking/auto_masking_widgets.dart';
-import 'package:decibel_sdk/src/utility/enums.dart';
-import 'package:decibel_sdk/src/utility/enums.dart';
 import 'package:flutter/material.dart';
 
 class AutoMasking with RenderObjectAutoMaskGetter {
