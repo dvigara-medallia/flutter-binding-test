@@ -470,18 +470,25 @@ class ScreenVisitedTabBar extends ScreenVisited {
     );
   }
   ScreenVisitedTabBar.internal({
-    required super.id,
-    required super.name,
-    required super.timestamp,
-    required super.captureKey,
+    required String id,
+    required String name,
+    required int timestamp,
+    required GlobalKey<State<StatefulWidget>> captureKey,
     required this.tabBarScreens,
     required this.tabIndex,
     required this.tabBarId,
     required this.tabBarname,
-    required super.enableAutomaticPopupRecording,
-    required super.listOfMasks,
-    required super.enableAutomaticMasking,
-  }) : super.tabBarChild();
+    required bool enableAutomaticPopupRecording,
+    required List<GlobalKey<State<StatefulWidget>>> listOfMasks,
+    required bool enableAutomaticMasking,
+  }) : super.tabBarChild(
+            id: id,
+            name: name,
+            timestamp: timestamp,
+            captureKey: captureKey,
+            enableAutomaticPopupRecording: enableAutomaticPopupRecording,
+            listOfMasks: listOfMasks,
+            enableAutomaticMasking: enableAutomaticMasking);
 
   @override
   ScreenVisited getScreenVisitedWithNewStartTimeStamp(int startTimeStamp) {
