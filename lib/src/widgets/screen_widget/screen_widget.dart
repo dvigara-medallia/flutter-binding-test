@@ -1,8 +1,10 @@
 import 'package:decibel_sdk/src/features/tracking.dart';
 import 'package:decibel_sdk/src/utility/extensions.dart';
+import 'package:decibel_sdk/src/utility/logger_sdk.dart';
 import 'package:decibel_sdk/src/utility/route_observer.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
 part '../mask_widget.dart';
 part 'inherited_widgets.dart';
 
@@ -92,6 +94,7 @@ class _ActiveScreenWidgetState extends State<_ActiveScreenWidget>
   ModalRoute<Object?>? route;
   bool get isTabBar => widget.tabNames != null && widget.tabController != null;
   final List<GlobalKey> listOfMasks = [];
+  final Logger logger = LoggerSDK.instance.screenWidgetLogger;
   // Defining an internal function to be able to remove the listener
   Future<void> _tabControllerListener() async {
     await Tracking.instance.tabControllerListener(
@@ -108,6 +111,8 @@ class _ActiveScreenWidgetState extends State<_ActiveScreenWidget>
 
   @override
   void didChangeDependencies() {
+    logger.d('didChangeDependencies');
+
     super.didChangeDependencies();
     CustomRouteObserver.screenWidgetRouteObserver
         .subscribe(this, ModalRoute.of(context)!);
@@ -115,6 +120,8 @@ class _ActiveScreenWidgetState extends State<_ActiveScreenWidget>
 
   @override
   void initState() {
+    logger.d('initState');
+
     super.initState();
     Tracking.instance.physicalSize =
         WidgetsBindingNullSafe.instance!.window.physicalSize;
@@ -134,6 +141,8 @@ class _ActiveScreenWidgetState extends State<_ActiveScreenWidget>
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
+    logger.d('didChangeAppLifecycleState ${state.toString()}');
+
     super.didChangeAppLifecycleState(state);
 
     switch (state) {
@@ -151,6 +160,8 @@ class _ActiveScreenWidgetState extends State<_ActiveScreenWidget>
 
   @override
   void didChangeMetrics() {
+    logger.d('didChangeMetrics');
+
     Tracking.instance.physicalSize =
         WidgetsBinding.instance.window.physicalSize;
     super.didChangeMetrics();
@@ -158,6 +169,8 @@ class _ActiveScreenWidgetState extends State<_ActiveScreenWidget>
 
   @override
   void dispose() {
+    logger.d('dispose');
+
     callWhenIsNotCurrentRoute();
     CustomRouteObserver.screenWidgetRouteObserver.unsubscribe(this);
     WidgetsBindingNullSafe.instance!.removeObserver(this);
@@ -167,11 +180,15 @@ class _ActiveScreenWidgetState extends State<_ActiveScreenWidget>
 
   @override
   void didPush() {
+    logger.d('didPush');
+
     callWhenIsCurrentRoute();
   }
 
   @override
   void didPopNext() {
+    logger.d('didPopNext');
+
     route = ModalRoute.of(context);
     if (route?.isCurrent ?? false) {
       callWhenIsCurrentRoute();
@@ -180,15 +197,22 @@ class _ActiveScreenWidgetState extends State<_ActiveScreenWidget>
 
   @override
   void didPop() {
+    logger.d('didPop');
+
     callWhenIsNotCurrentRoute();
   }
 
   @override
   void didPushNext() {
+    logger.d('didPushNext');
     callWhenIsNotCurrentRoute();
   }
 
   Future<void> callWhenIsNotCurrentRoute() async {
+    logger.d(
+      'callWhenIsNotCurrentRoute - screenId: ${screenId.toString()} - isTabBar: $isTabBar',
+    );
+
     await Tracking.instance.endScreen(screenId.toString(), isTabBar: isTabBar);
   }
 
@@ -202,6 +226,10 @@ class _ActiveScreenWidgetState extends State<_ActiveScreenWidget>
         tabBarIndex: widget.tabController?.index,
         enableAutomaticPopupRecording: widget.enableAutomaticPopupRecording,
         enableAutomaticMasking: widget.enableAutomaticMasking);
+
+    logger.d(
+        'callWhenIsCurrentRoute - screenVisited ${screenVisited.toString()}');
+
     await Tracking.instance.startScreen(
       screenVisited,
     );
