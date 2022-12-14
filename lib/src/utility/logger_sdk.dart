@@ -61,6 +61,7 @@ class LoggerSDK {
 
   Logger _plainLogger(bool moduleEnabled) {
     return Logger(
+      printer: CustomPrinter(),
       filter: ModuleLogFilter(
         enabled: enabled,
         moduleEnabled: moduleEnabled,
@@ -79,5 +80,15 @@ class ModuleLogFilter extends DevelopmentFilter {
     if (!enabled) return false;
     if (!moduleEnabled) return false;
     return true;
+  }
+}
+
+class CustomPrinter extends PrettyPrinter {
+  @override
+  List<String> log(LogEvent event) {
+    late List<String> prettyOutput;
+    prettyOutput = super.log(event);
+    prettyOutput.insert(0, 'DXA - Flutter');
+    return prettyOutput;
   }
 }
