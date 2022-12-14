@@ -17,7 +17,7 @@ class PlaceholderType {
   String getPlaceholderText() {
     switch (placeholderTypeEnum) {
       case PlaceholderTypeEnum.replayDisabled:
-        return 'Replace Disabled';
+        return 'Replay Disabled';
 
       case PlaceholderTypeEnum.noPreviewAvailable:
         return 'No preview available';
