@@ -206,7 +206,9 @@ class SessionReplay {
   ) async {
     if (currentTrackedScreen.screenshotTakenList.isNotEmpty) return;
     final ByteData byteData = await placeholderImageConfig.getPlaceholderImage(
-        context, PlaceholderType.replayDisabled);
+      context,
+      PlaceholderType(placeholderTypeEnum: PlaceholderTypeEnum.replayDisabled),
+    );
     final int startFocusTime = DateTime.now().millisecondsSinceEpoch;
     currentTrackedScreen.screenshotTakenList.add(
       ScreenShotTaken(startFocusTime: startFocusTime),
