@@ -110,4 +110,7 @@ extension ScreenVisitedExt on ScreenVisited {
     return DateTime.now().millisecondsSinceEpoch - timestamp >
         SDKConstants.maxReplayDurationPerScreen.inMilliseconds;
   }
+
+  int get maximumDurationForLastScreenshot =>
+      timestamp + SDKConstants.maxReplayDurationPerScreen.inMilliseconds;
 }
