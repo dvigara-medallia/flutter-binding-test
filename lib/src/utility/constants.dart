@@ -1,3 +1,3 @@
 class SDKConstants {
-  static const Duration maxReplayDurationPerScreen = Duration(minutes: 1);
+  static const Duration maxReplayDurationPerScreen = Duration(minutes: 5);
 }
