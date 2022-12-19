@@ -137,10 +137,12 @@ class DecibelSdk {
     return _api.getSessionId();
   }
 
-  ///enable Logs for every SDK module
+  ///Enable Logs for every SDK module.
+  ///Call this BEFORE initialize
   static void enableAllLogs() => LoggerSDK.all();
 
-  ///enable Logs only for the selected modules. All modules are disabled by default.
+  ///Enable Logs only for the selected modules. All modules are disabled by default.
+  ///Call this BEFORE initialize
   static void enableSelectedLogs({
     bool tracking = false,
     bool sessionReplay = false,
