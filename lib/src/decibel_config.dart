@@ -137,5 +137,27 @@ class DecibelSdk {
     return _api.getSessionId();
   }
 
+  ///enable Logs for every SDK module
   static void enableAllLogs() => LoggerSDK.all();
+
+  ///enable Logs only for the selected modules. All modules are disabled by default.
+  static void enableSelectedLogs({
+    bool tracking = false,
+    bool sessionReplay = false,
+    bool frameTracking = false,
+    bool routeObserver = false,
+    bool autoMasking = false,
+    bool screenWidget = false,
+    bool maskWidget = false,
+  }) =>
+      LoggerSDK.selected(
+        enabled: true,
+        tracking: tracking,
+        sessionReplay: sessionReplay,
+        frameTracking: frameTracking,
+        routeObserver: routeObserver,
+        autoMasking: autoMasking,
+        screenWidget: screenWidget,
+        maskWidget: maskWidget,
+      );
 }

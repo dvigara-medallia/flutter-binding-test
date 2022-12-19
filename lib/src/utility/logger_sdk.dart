@@ -24,6 +24,27 @@ class LoggerSDK {
     return _instance;
   }
 
+  factory LoggerSDK.selected({
+    required bool enabled,
+    required bool tracking,
+    required bool sessionReplay,
+    required bool frameTracking,
+    required bool routeObserver,
+    required bool autoMasking,
+    required bool screenWidget,
+    required bool maskWidget,
+  }) {
+    _instance.enabled = enabled;
+    _instance.tracking = tracking;
+    _instance.sessionReplay = sessionReplay;
+    _instance.frameTracking = frameTracking;
+    _instance.routeObserver = routeObserver;
+    _instance.autoMasking = autoMasking;
+    _instance.screenWidget = screenWidget;
+    _instance.maskWidget = maskWidget;
+    return _instance;
+  }
+
   LoggerSDK._internal();
 
   bool enabled = false;
