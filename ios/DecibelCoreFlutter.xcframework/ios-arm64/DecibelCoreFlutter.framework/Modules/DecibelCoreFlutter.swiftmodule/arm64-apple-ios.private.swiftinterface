@@ -1,7 +1,12 @@
 // swift-interface-format-version: 1.0
+<<<<<<< HEAD:ios/DecibelCoreFlutter.xcframework/ios-arm64/DecibelCoreFlutter.framework/Modules/DecibelCoreFlutter.swiftmodule/arm64-apple-ios.private.swiftinterface
 // swift-compiler-version: Apple Swift version 5.7.1 (swiftlang-5.7.1.135.3 clang-1400.0.29.51)
 // swift-module-flags: -target arm64-apple-ios10.3 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -module-name DecibelCoreFlutter
 // swift-module-flags-ignorable: -enable-bare-slash-regex
+=======
+// swift-compiler-version: Apple Swift version 5.3.2 (swiftlang-1200.0.45 clang-1200.0.32.28)
+// swift-module-flags: -target armv7-apple-ios10.3 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -module-name DecibelCoreFlutter
+>>>>>>> develop:ios/DecibelCoreFlutter.xcframework/ios-arm64_armv7/DecibelCoreFlutter.framework/Modules/DecibelCoreFlutter.swiftmodule/armv7-apple-ios.swiftinterface
 import AVFoundation
 import CommonCrypto
 import CoreData
@@ -11,14 +16,17 @@ import Swift
 import SystemConfiguration
 import UIKit
 import WebKit
+<<<<<<< HEAD:ios/DecibelCoreFlutter.xcframework/ios-arm64/DecibelCoreFlutter.framework/Modules/DecibelCoreFlutter.swiftmodule/arm64-apple-ios.private.swiftinterface
 import _Concurrency
 import _StringProcessing
+=======
+>>>>>>> develop:ios/DecibelCoreFlutter.xcframework/ios-arm64_armv7/DecibelCoreFlutter.framework/Modules/DecibelCoreFlutter.swiftmodule/armv7-apple-ios.swiftinterface
 @objc public enum SDKMaskView : Swift.Int {
   case automatic
   case mask
   case unmask
-  public init?(rawValue: Swift.Int)
   public typealias RawValue = Swift.Int
+  public init?(rawValue: Swift.Int)
   public var rawValue: Swift.Int {
     get
   }
@@ -26,8 +34,8 @@ import _StringProcessing
 @objc public enum SDKRecordingMode : Swift.Int {
   case defineScreensToRecord
   case defineScreensToStopRecord
-  public init?(rawValue: Swift.Int)
   public typealias RawValue = Swift.Int
+  public init?(rawValue: Swift.Int)
   public var rawValue: Swift.Int {
     get
   }
@@ -35,8 +43,8 @@ import _StringProcessing
 @objc public enum SDKLogLevel : Swift.Int {
   case none
   case info
-  public init?(rawValue: Swift.Int)
   public typealias RawValue = Swift.Int
+  public init?(rawValue: Swift.Int)
   public var rawValue: Swift.Int {
     get
   }
@@ -45,13 +53,13 @@ import _StringProcessing
   case hiFi
   case loFi
   case automatic
-  public init?(rawValue: Swift.Int)
   public typealias RawValue = Swift.Int
+  public init?(rawValue: Swift.Int)
   public var rawValue: Swift.Int {
     get
   }
 }
-@objc public protocol DecibelDelegate {
+@objc public protocol DecibelDelegate : AnyObject {
   @objc func getSessionURL(_ sessionUrl: Swift.String)
 }
 @objc public protocol DecibelMultiPlatform : DecibelCoreFlutter.DecibelProtocol {
@@ -59,7 +67,11 @@ import _StringProcessing
   @objc func initialize(account: Swift.String, property: Swift.String, consents: [Swift.Int], multiPlatform: DecibelCoreFlutter.SDKMultiPlatform)
   @objc func getSessionId() -> Swift.String?
 }
+<<<<<<< HEAD:ios/DecibelCoreFlutter.xcframework/ios-arm64/DecibelCoreFlutter.framework/Modules/DecibelCoreFlutter.swiftmodule/arm64-apple-ios.private.swiftinterface
 @objc public protocol DecibelProtocol {
+=======
+@objc public protocol DecibelProtocol : AnyObject {
+>>>>>>> develop:ios/DecibelCoreFlutter.xcframework/ios-arm64_armv7/DecibelCoreFlutter.framework/Modules/DecibelCoreFlutter.swiftmodule/armv7-apple-ios.swiftinterface
   @objc var delegate: DecibelCoreFlutter.DecibelDelegate? { get set }
   @objc func initialize(account: Swift.String, property: Swift.String)
   @objc func initialize(account: Swift.String, property: Swift.String, consents: [Swift.Int])
@@ -89,13 +101,13 @@ import _StringProcessing
 @objc public enum SDKPlatformType : Swift.Int {
   case flutter
   case xamarin
-  public init?(rawValue: Swift.Int)
   public typealias RawValue = Swift.Int
+  public init?(rawValue: Swift.Int)
   public var rawValue: Swift.Int {
     get
   }
 }
-extension CoreData.NSManagedObject {
+extension NSManagedObject {
   open class func first(on context: CoreData.NSManagedObjectContext?, with fetchRequest: CoreData.NSFetchRequest<CoreData.NSManagedObject>?) -> CoreData.NSManagedObject?
   open class func last(on context: CoreData.NSManagedObjectContext?, with fetchRequest: CoreData.NSFetchRequest<CoreData.NSManagedObject>?) -> CoreData.NSManagedObject?
   open class func allObjects(on context: CoreData.NSManagedObjectContext?, with fetchRequest: CoreData.NSFetchRequest<CoreData.NSManagedObject>?) -> [CoreData.NSManagedObject]
@@ -112,28 +124,29 @@ extension CoreData.NSManagedObject {
   case tracking
   case form
   case none
-  public init?(rawValue: Swift.Int)
   public typealias RawValue = Swift.Int
   public var rawValue: Swift.Int {
     get
   }
+  public init?(rawValue: Swift.Int)
 }
 @objc public class SDKMultiPlatform : ObjectiveC.NSObject {
   public init(type: DecibelCoreFlutter.SDKPlatformType, version: Swift.String, language: Swift.String)
   @objc deinit
+  @objc override dynamic public init()
 }
 @objc public enum SDKRecordingScreen : Swift.Int {
   case record
   case noRecord
   case undefined
-  public init?(rawValue: Swift.Int)
   public typealias RawValue = Swift.Int
+  public init?(rawValue: Swift.Int)
   public var rawValue: Swift.Int {
     get
   }
 }
-extension UIKit.UIViewController {
-  @objc @_Concurrency.MainActor(unsafe) dynamic public var diScreenName: Swift.String? {
+extension UIViewController {
+  @objc dynamic public var diScreenName: Swift.String? {
     @objc get
     @objc set
   }
@@ -314,8 +327,8 @@ extension UIKit.UIViewController {
   case ZAR
   case ZMW
   case ZWL
-  public init?(rawValue: Swift.Int)
   public typealias RawValue = Swift.Int
+  public init?(rawValue: Swift.Int)
   public var rawValue: Swift.Int {
     get
   }
@@ -330,8 +343,12 @@ extension UIKit.UIViewController {
   case noMask
   case unmaskInputs
   case unmaskWebViews
+<<<<<<< HEAD:ios/DecibelCoreFlutter.xcframework/ios-arm64/DecibelCoreFlutter.framework/Modules/DecibelCoreFlutter.swiftmodule/arm64-apple-ios.private.swiftinterface
   public init?(rawValue: Swift.Int)
+=======
+>>>>>>> develop:ios/DecibelCoreFlutter.xcframework/ios-arm64_armv7/DecibelCoreFlutter.framework/Modules/DecibelCoreFlutter.swiftmodule/armv7-apple-ios.swiftinterface
   public typealias RawValue = Swift.Int
+  public init?(rawValue: Swift.Int)
   public var rawValue: Swift.Int {
     get
   }
@@ -339,28 +356,28 @@ extension UIKit.UIViewController {
 @_inheritsConvenienceInitializers @objc public class DecibelSDK : ObjectiveC.NSObject {
   @objc public static let multiPlatform: DecibelCoreFlutter.DecibelFlutter
   @objc public static let settings: DecibelCoreFlutter.SDKSettings
-  @objc override dynamic public init()
   @objc deinit
+  @objc override dynamic public init()
 }
-extension UIKit.UIView {
-  @objc @_Concurrency.MainActor(unsafe) dynamic public var diMasking: DecibelCoreFlutter.SDKMaskView {
+extension UIView {
+  @objc dynamic public var diMasking: DecibelCoreFlutter.SDKMaskView {
     @objc get
     @objc set
   }
-  @objc @_Concurrency.MainActor(unsafe) dynamic public var diFormTrack: Swift.Bool {
+  @objc dynamic public var diFormTrack: Swift.Bool {
     @objc get
     @objc set
   }
-  @objc @_Concurrency.MainActor(unsafe) dynamic public var diAddScreenForRecording: DecibelCoreFlutter.SDKRecordingScreen {
+  @objc dynamic public var diAddScreenForRecording: DecibelCoreFlutter.SDKRecordingScreen {
     @objc get
     @objc set
   }
-  @objc @_Concurrency.MainActor(unsafe) dynamic public var diSessionReplayType: DecibelCoreFlutter.SDKSessionReplayType {
+  @objc dynamic public var diSessionReplayType: DecibelCoreFlutter.SDKSessionReplayType {
     @objc get
     @objc set
   }
 }
-@objc public protocol SDKSettings {
+@objc public protocol SDKSettings : AnyObject {
   @objc var mobileDataEnable: Swift.Bool { get set }
   @objc var crashReporterEnable: Swift.Bool { get set }
   @objc var recordingMode: DecibelCoreFlutter.SDKRecordingMode { get set }

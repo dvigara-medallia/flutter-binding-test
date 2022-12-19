@@ -192,9 +192,13 @@ class SessionReplay {
         DateTime.now().millisecondsSinceEpoch -
                 lastScreenshotSent!.startFocusTime! >
             1000) {
-      if (screenVisited.isCurrentScreenOverMaxDuration) return;
+      late int startFocusTime;
+      if (screenVisited.isCurrentScreenOverMaxDuration) {
+        startFocusTime = screenVisited.maximumDurationForLastScreenshot;
+      } else {
+        startFocusTime = DateTime.now().millisecondsSinceEpoch;
+      }
 
-      final int startFocusTime = DateTime.now().millisecondsSinceEpoch;
       final ScreenshotMessage screenShotMessage = lastScreenshotSent!;
       lastScreenshotSent = null;
       await _sendScreenshot(
