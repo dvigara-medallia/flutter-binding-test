@@ -163,7 +163,7 @@ class _ActiveScreenWidgetState extends State<_ActiveScreenWidget>
     logger.d('didChangeMetrics');
 
     Tracking.instance.physicalSize =
-        WidgetsBinding.instance.window.physicalSize;
+        WidgetsBindingNullSafe.instance!.window.physicalSize;
     super.didChangeMetrics();
   }
 
