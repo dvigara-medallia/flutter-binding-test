@@ -154,6 +154,8 @@ class Tracking {
   }
 
   Future<void> wentToBackground() async {
+    debugPrint('wentToBackground');
+
     //if we already have saved a screen saved when the app went to background,
     //it means that we should ignore calls to this method until the app returns
     //from background
@@ -161,11 +163,15 @@ class Tracking {
     //No unfinished screens, so there's no possibility of ending any screen
     if (visitedUnfinishedScreensList.isEmpty) return;
     screenVisitedWhenAppWentToBackground = visitedUnfinishedScreensList.last;
+    debugPrint('wentToBackground - end screen');
+
     await endScreen(screenVisitedWhenAppWentToBackground!.id,
         isBackground: true);
   }
 
   Future<void> returnFromBackground() async {
+    debugPrint('returnFromBackground - start screen');
+
     //no screen to return to
     if (screenVisitedWhenAppWentToBackground == null) return;
     assert(visitedUnfinishedScreensList.isEmpty);
@@ -175,6 +181,7 @@ class Tracking {
       DateTime.now().millisecondsSinceEpoch,
     );
     screenVisitedWhenAppWentToBackground = null;
+    debugPrint('returnFromBackground - start screen');
     await startScreen(returnFormBackgroundScreenVIsited, isBackground: true);
   }
 
