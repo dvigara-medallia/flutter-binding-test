@@ -2,13 +2,16 @@
 import 'package:decibel_sdk/src/features/session_replay.dart';
 import 'package:decibel_sdk/src/messages.dart';
 import 'package:decibel_sdk/src/utility/extensions.dart';
+import 'package:decibel_sdk/src/utility/logger_sdk.dart';
 import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
 
 class Tracking {
-  Tracking._internal();
+  Tracking._internal() : logger = LoggerSDK.instance.trackingLogger;
   static final _instance = Tracking._internal();
   static Tracking get instance => _instance;
 
+  final Logger logger;
   final DecibelSdkApi _apiInstance = DecibelSdkApi();
   final List<ScreenVisited> _visitedScreensList = [];
   List<ScreenVisited> get visitedScreensList => _visitedScreensList;
@@ -98,18 +101,34 @@ class Tracking {
       visitedUnfinishedScreensList.isEmpty ||
           visitedUnfinishedScreensList.length == 1,
     );
+    late bool backgroundFlag;
+    //When returning from background there's the possibility that the screen
+    //which went to background isn't the same as the one at the top of the
+    //navigation stack. This checks if there is a screen that went to background
+    //and hasn't returned, and if so then it notifies the native
+    //SDK that it has returned from background (Only for iOS) and cleans
+    //[screenVisitedWhenAppWentToBackground].
+    if (screenVisitedWhenAppWentToBackground != null) {
+      backgroundFlag = true;
+      screenVisitedWhenAppWentToBackground = null;
+    } else {
+      backgroundFlag = isBackground;
+    }
     if (visitedUnfinishedScreensList.isNotEmpty) {
       await endScreen(visitedUnfinishedScreensList[0].id);
     }
     _addVisitedScreenList(
       screenVisited,
     );
+    logger.d(
+      'Start Screen - name: ${screenVisited.name} - id: ${screenVisited.uniqueId}',
+    );
     await _apiInstance.startScreen(
       StartScreenMessage()
         ..screenName = screenVisited.name
         ..screenId = screenVisited.uniqueId
         ..startTime = screenVisited.timestamp
-        ..isBackground = isBackground,
+        ..isBackground = backgroundFlag,
     );
     await SessionReplay.instance.newScreen();
   }
@@ -144,6 +163,9 @@ class Tracking {
     //fire and forget to keep synchronicity
     //ignore: unawaited_futures
     SessionReplay.instance.closeScreenVideo(screenVisitedFinished);
+    logger.d(
+      'End Screen - name: ${screenVisitedFinished.name} - id: ${screenVisitedFinished.uniqueId}',
+    );
     await _apiInstance.endScreen(
       EndScreenMessage()
         ..screenName = screenVisitedFinished.name
